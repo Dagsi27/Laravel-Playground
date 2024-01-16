@@ -19,12 +19,12 @@ setup-win: ## It's for first running in Windows
 	IF NOT EXIST ".env.local" COPY ".env.local.example" ".env.local"
 	IF NOT EXIST ".env" COPY ".env.example" ".env"
 	@$(DOCKER) build --no-cache
-	@$(EXEC) composer install --no-interaction --prefer-dist --no-progress
 	@$(DOCKER) up -d
+	@$(EXEC) composer install --no-interaction --prefer-dist --no-progress
 
 setup-linux: ## It's for first running in Linux
 	@cp -n .env.local.example .env.local || true
 	@cp -n .env.example .env || true
 	@$(DOCKER) build --no-cache
-	@$(EXEC) composer install --no-interaction --prefer-dist --no-progress
 	@$(DOCKER) up -d
+	@$(EXEC) composer install --no-interaction --prefer-dist --no-progress
