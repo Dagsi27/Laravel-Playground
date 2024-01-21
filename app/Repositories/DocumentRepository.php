@@ -6,9 +6,9 @@ use App\Models\Document;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class DocumentRepository extends RepositoryInterface
+class DocumentRepository implements RepositoryInterface
 {
-    function __construct(public Document $document) {}
+    function __construct(protected Document $document) {}
 
     public function get(int $id) : Model {
         return $this->document->find($id);

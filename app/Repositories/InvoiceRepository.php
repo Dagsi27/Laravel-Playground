@@ -6,9 +6,9 @@ use App\Models\Invoice;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class InvoiceRepository extends RepositoryInterface
+class InvoiceRepository implements RepositoryInterface
 {
-    function __construct(public Invoice $invoice) {}
+    function __construct(protected Invoice $invoice) {}
 
     public function get(int $id) : Model {
         return $this->invoice->find($id);

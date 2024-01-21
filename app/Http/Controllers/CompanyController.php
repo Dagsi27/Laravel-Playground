@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\CompanyRepository;
+use App\Http\Resources\User\UserCollectionResource;
 
 class CompanyController extends Controller
 {
+    function __construct(protected CompanyRepository $companyRepository) {}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $collection = $this->companyRepository->fetch();
+
+        return UserCollectionResource::make(['data' => $collection, 'count' => $collection->count()]);
     }
 
     /**
@@ -19,7 +25,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->companyRepository->create($request->all());
     }
 
     /**
@@ -27,7 +33,7 @@ class CompanyController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**

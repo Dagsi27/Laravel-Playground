@@ -6,9 +6,9 @@ use App\Models\Authorisation;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class AuthorisationRepository extends RepositoryInterface
+class AuthorisationRepository implements RepositoryInterface
 {
-    function __construct(public Authorisation $authorisation) {}
+    function __construct(protected Authorisation $authorisation) {}
 
     public function get(int $id) : Model {
         return $this->authorisation->find($id);

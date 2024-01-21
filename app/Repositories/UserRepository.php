@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class UserRepository extends RepositoryInterface
+class UserRepository implements RepositoryInterface
 {
-    function __construct(public User $user) {}
+    function __construct(protected User $user) {}
 
     public function get(int $id) : Model {
         return $this->user->find($id);

@@ -3,12 +3,13 @@
 namespace App\Repositories;
 
 use App\Models\Company;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\RepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
-class CompanyRepository extends RepositoryInterface
+class CompanyRepository implements RepositoryInterface
 {
-    function __construct(public Company $company) {}
+    function __construct(protected Company $company) {}
 
     public function get(int $id) : Model {
         return $this->company->find($id);

@@ -6,9 +6,9 @@ use App\Models\OutstandingBalanceReport;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class OutstandingBalanceReportRepository extends RepositoryInterface
+class OutstandingBalanceReportRepository implements RepositoryInterface
 {
-    function __construct(public OutstandingBalanceReport $outstandingBalanceReport) {}
+    function __construct(protected OutstandingBalanceReport $outstandingBalanceReport) {}
 
     public function get(int $id) : Model {
         return $this->outstandingBalanceReport->find($id);
