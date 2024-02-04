@@ -1,6 +1,6 @@
 # Executables (local)
 DOCKER = docker-compose -f ./.docker/local/docker-compose.yml --env-file ./.env.local
-EXEC = @$(DOCKER) exec -ti ds-app
+EXEC = docker container exec -ti ds-app
 
 ## —— Docker 🐳 ————————————————————————————————————————————————————————————————
 build: ## Builds the Docker images
