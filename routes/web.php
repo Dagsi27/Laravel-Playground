@@ -1,5 +1,6 @@
 <?php
 
+use Elastic\Elasticsearch\ClientBuilder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 
@@ -15,7 +16,23 @@ use App\Http\Controllers\CompanyController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $client = ClientBuilder::create()
+        ->setHosts(config('database.connections.elasticsearch.hosts'))
+        ->build();
+
+// Example search query
+    $params = [
+        'index' => 'my_index',
+        'body' => [
+            'query' => [
+                'match' => [
+                    'field' => 'search_keyword',
+                ],
+            ],
+        ],
+    ];
+
+    return $client->search($params);
 });
 
 Route::get('companies', [CompanyController::class,'index']);

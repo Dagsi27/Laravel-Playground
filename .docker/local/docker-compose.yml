@@ -39,12 +39,26 @@ services:
         environment:
             - TZ=${TIME_ZONE}
     ds-es:
-        image: elasticsearch:8.12.0
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
         container_name: ds-es
-        restart: unless-stopped
+        user: "1000:1000"
+        volumes:
+            - ds-es:/usr/share/elasticsearch/data
+        environment:
+            - xpack.security.enabled=false
+            - discovery.type=single-node
+            - cluster.routing.allocation.disk.threshold_enabled=false
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
         ports:
             - "9200:9200"
 
 volumes:
     ds-mysql:
+        driver: local
+    ds-es:
         driver: local
